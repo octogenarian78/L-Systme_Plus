@@ -32,6 +32,51 @@ def aller_point(x, y, h):
 # Place la tortue dans un point initial
 aller_point(0, -100, 90)
 
+def enlever_non_conformes(chaine, liste_permise):
+    # Initialise une chaîne vide pour stocker les caractères conformes
+    chaine_conforme = ""
+    
+    # Variable de suivi pour détecter le cas spécial
+    remplacer_f = False
+
+    # Parcourt chaque caractère de la chaîne
+    for i in range(len(chaine)):
+        caractere = chaine[i]
+        
+        # Si on rencontre un 'F' et le prochain caractère est 'f'
+        if caractere == 'F' and i < len(chaine) - 1 and chaine[i + 1] == 'f':
+            # On le remplace par 'f' et on saute le prochain caractère
+            chaine_conforme += 'f'
+            remplacer_f = True
+            continue
+
+        # Si le caractère doit être remplacé par 'f' (cas spécial)
+        if remplacer_f:
+            chaine_conforme += 'f'
+            remplacer_f = False
+            continue
+
+        # Vérifie si le caractère est présent dans la liste_permise
+        if caractere in liste_permise:
+            # Si oui, l'ajoute à la chaîne conforme
+            chaine_conforme += caractere
+
+    # Retourne la chaîne conforme
+    return chaine_conforme
+
+# Exemple d'utilisation
+chaine = "Bonjour ! Comment ça va ? Ff"
+liste_permise = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+# Appel de la fonction pour enlever les caractères non conformes
+chaine_conforme = enlever_non_conformes(chaine, liste_permise)
+
+print("Chaîne d'origine:", chaine)
+print("Chaîne après suppression des caractères non conformes:", chaine_conforme)
+
+
+
+
 def genere_l_systme(axiom, regles, n):
     """
     Génère un L-système grâce à un axiom et aux règles fournies.
@@ -52,6 +97,9 @@ def genere_l_systme(axiom, regles, n):
         new_axiom = ''
     return axiom
 
+
+
+
 def afficher_l_systeme(axiom, ang, ratio):
     """
     Affiche la fractale générée par un L-système.
@@ -64,15 +112,23 @@ def afficher_l_systeme(axiom, ang, ratio):
     Renvoi :
         Affiche la fractale.
     """
-
+    liste_permise = ["F", "f", "+", "-", "[", "]", "|"]
+    axiom = enlever_non_conformes(axiom, liste_permise)
     print(axiom)
+    
     l_pos = []  # Liste pour sauvegarder la position de la tortue
-    t.speed(0)
+    t.speed(-1)
     t.down()
     t.left(90)
-    lg = 15
+    lg = 1
+    t.ht()
     taille = len(axiom)
-    for char in axiom:
+    progress = 0
+    
+    progress_bar = "[" + "-" * 20 + "]"
+    print(f"\r{progress_bar} {progress}%", end="")
+    
+    for index, char in enumerate(axiom):
         if char == 'F' or char == 'f':
             t.forward(lg)
             
@@ -87,11 +143,18 @@ def afficher_l_systeme(axiom, ang, ratio):
             lg /= ratio
             lp = l_pos.pop()
             aller_point(lp[0], lp[1], lp[2])
-
         elif char == "|":
             t.left(180)
-        taille -= 1
-        print(taille)
+        
+        # Mise à jour de la barre de progression
+        progress = (index + 1) / taille
+        completed_length = int(50 * progress)
+        progress_bar = "[" + "#" * completed_length + "-" * (50 - completed_length) + "]"
+        print(f"\r{progress_bar} {int(progress * 100)}%", end="")
+
+    # Nouvelle ligne après la fin de la boucle
+    print()
+
 
 def fait_fractal(regles, axiom, ang, ratio, n):
     """
@@ -246,18 +309,26 @@ systeme = [(#fractal 1
 "L",
 90
 ),
-(
+(#fractal 13: triangle de Sierpinsky
 {
     "X" : "XF+XF+XF+",
     "F" : "FF",
 },
 "X",
 120
+),
+(#tapis de Sierpinsky
+{
+    "X" : "XFXFXF+XFXFXF+XFXFXF+XFXFXF+",
+    "F" : "FFF"
+},
+"XFXFXF+XFXFXF+XFXFXF+XFXFXF+",
+90
 )
 ]
 
 print(len(systeme))
-fractalisation(systeme[13],3)
+fractalisation(systeme[#number of l_systeme],#number for fractalization)
 t.ht()
 
 
