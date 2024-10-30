@@ -1,0 +1,107 @@
+[
+    {
+        "name":"Plante 1",
+        "rules":{
+            "F": "FF",
+            "X": "F[-X][X]F[-X]+X", 
+            "Y": "F[+Y]-Y"
+        },
+        "axiom":"++++X",
+        "angle":22.5
+    },
+    {
+        "name":"Fractale 1",
+        "rules":{
+            "F":"F+F-F-FF+F+F-F"
+        },
+        "axiom":"F+F+F+F",
+        "angle":90
+    },
+    {
+        "name":"Fractale 2",
+        "rules":{
+            "F":"FF+F-F+F+FF"
+        },
+        "axiom":"F+F+F+F",
+        "angle":90
+    },
+    {
+        "name":"Flocon de von Koch",
+        "rules":{
+            "F":"F-F++F-F"
+        },
+        "axiom":"F++F++F++",
+        "angle":60
+    },
+    {
+        "name":"Courbe du dragon",
+        "rules":{
+            "X":"X+YF+",
+            "Y":"-FX-Y"
+        },
+        "axiom":"FX",
+        "angle":90
+    },
+    {
+        "name":"Courbe de tendragon",
+        "rules":{
+            "F":"F+F-F"
+        },
+        "axiom":"F",
+        "angle":120
+    },
+    {
+        "name":"Pseudo triangle de Sierpinski",
+        "rules":{
+            "F":"f-F-f",
+            "f":"F+f+F"
+        },
+        "axiom":"F",
+        "angle":60
+    },
+    {
+        "name":"Courbe de Levy C",
+        "rules":{
+            "F":"-F++F-"
+        },
+        "axiom":"F",
+        "angle":45
+    },
+    {
+        "name":"Courbe de twindragon",
+        "rules":{
+            "X":"X+YF",
+            "Y":"FX-Y"
+        },
+        "axiom":"FX+FX+",
+        "angle":90
+    },
+    {
+        "name":"Courbe de Hilbert",
+        "rules":{
+            "X":"-YF+XFX+FY-",
+            "Y":"+XF-YFY-FX+"
+        },
+        "axiom":"X",
+        "angle":90
+    },
+    {
+        "name":"Triangle de Sierpinski",
+        "rules":{
+            "X":"XF+XF+xF+",
+            "F":"FF"
+        },
+        "axiom":"X",
+        "angle":120
+    },
+    {
+        "name":"Tapis de Sierpinski",
+        "rules":{
+            "X" : "XFXFXF+XFXFXF+XFXFXF+XFXFXF+",
+            "F" : "FFF"
+        },
+        "axiom":"X",
+        "angle":90
+    }
+
+]
